@@ -13,7 +13,7 @@ pygame.init()
 
 import pytest  # noqa: E402
 
-from src.game import O, X, Board  # noqa: E402
+from src.game import Board, O, X  # noqa: E402
 from src.renderer import (  # noqa: E402
     ORIGIN,
     cell_top_polygon,
@@ -64,7 +64,6 @@ def test_cell_top_polygon_shape() -> None:
 
 def test_hit_test_all_cells() -> None:
     """Centre of every cell's top face must hit-test to that cell (NFR-4)."""
-    board = Board()
     for cell_idx in range(27):
         z = cell_idx // 9
         rem = cell_idx % 9
@@ -73,7 +72,7 @@ def test_hit_test_all_cells() -> None:
         poly = cell_top_polygon(x, y, z)
         cx = sum(p[0] for p in poly) // 4
         cy = sum(p[1] for p in poly) // 4
-        result = hit_test((cx, cy), board)
+        result = hit_test((cx, cy))
         assert result is not None, f"hit_test returned None for cell {cell_idx} at ({cx},{cy})"
         # For cells occluded by higher layers, the topmost cell wins; verify
         # we at least get a valid cell (topmost at that pixel).
@@ -86,8 +85,7 @@ def test_hit_test_all_cells() -> None:
 
 def test_hit_test_empty_surface() -> None:
     """A point far off the board must return None."""
-    board = Board()
-    assert hit_test((0, 0), board) is None
+    assert hit_test((0, 0)) is None
 
 
 # --- draw_cube ---

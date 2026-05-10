@@ -155,11 +155,15 @@ def _point_in_polygon(px: int, py: int, poly: list[tuple[int, int]]) -> bool:
     return inside
 
 
-def hit_test(screen_pos: tuple[int, int], board: object) -> int | None:
+def hit_test(screen_pos: tuple[int, int]) -> int | None:
     """Return the cell index whose top face contains *screen_pos*, or None.
 
-    Tests topmost (highest z) first; within same z, lowest y then lowest x
-    (reverse of painter's order) so the visually topmost cell wins.
+    Pure geometry test — does not check occupancy; callers must validate
+    the returned cell via ``Board.make_move`` before applying the move.
+
+    Tests topmost (highest z) first; within same z, ascending y then x
+    (same order as painter's, which is fine because top faces tile without
+    overlap within a layer).
     """
     px, py = screen_pos
     for z in range(2, -1, -1):
