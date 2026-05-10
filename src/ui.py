@@ -12,7 +12,7 @@ from __future__ import annotations
 import pygame
 
 from src.ai import EASY, MEDIUM, get_move
-from src.game import O, X, Board
+from src.game import WIN_LINES, Board, O, X
 from src.renderer import draw_cube, highlight_win_line, hit_test
 
 # ---------------------------------------------------------------------------
@@ -54,8 +54,6 @@ def _draw_button(
 
 def _find_win_cells(board: Board, player: int) -> list[int] | None:
     """Return the first winning line for *player*, or ``None``."""
-    from src.game import WIN_LINES
-
     cells = board.cells
     for a, b, c in WIN_LINES:
         if cells[a] == player and cells[b] == player and cells[c] == player:
@@ -142,6 +140,7 @@ class ResultOverlay:
 
         overlay = pygame.Surface(self.screen.get_size(), pygame.SRCALPHA)
         overlay.fill(OVERLAY_BG)
+        background = self.screen.copy()  # snapshot before loop to prevent darkening
 
         while True:
             mouse = pygame.mouse.get_pos()
@@ -154,6 +153,7 @@ class ResultOverlay:
                     if btn_menu.collidepoint(event.pos):
                         return "menu"
 
+            self.screen.blit(background, (0, 0))  # restore each frame
             self.screen.blit(overlay, (0, 0))
             msg = _font(48).render(self.message, True, TEXT_COLOUR)
             self.screen.blit(msg, msg.get_rect(center=(400, 260)))
@@ -327,5 +327,5 @@ class App:
         while True:
             mode, difficulty = MenuScreen(self.screen).run()
             game = GameScreen(self.screen, mode, difficulty)
-            result = game.run()
-            # result is always 'menu' — loop back
+            game.run()
+            # always returns 'menu' — loop back
