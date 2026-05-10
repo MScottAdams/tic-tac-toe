@@ -31,7 +31,7 @@ ignore = ["E501"]
 
 [tool.coverage.run]
 source = ["src"]
-omit = ["tests/*"]
+omit = ["tests/*", "src/ui.py"]  # ui.py: pygame event loops require a display
 
 [dependency-groups]
 dev = [
