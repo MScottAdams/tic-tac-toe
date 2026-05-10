@@ -7,7 +7,7 @@
   },
   "plan": {
     "title": "Desktop UI & Game Flow",
-    "status": "proposed",
+    "status": "running",
     "narrative": {
       "Overview": "Wire together game model, AI, and renderer into a complete pygame application. Handles game mode selection, player turns, result display, scoreboard, and Play Again flow.",
       "Requirements": "FR-1 (window), FR-2 (mode selection), FR-3 (click to play), FR-8 (scoreboard), FR-9 (Play Again), NFR-1 (pygame only).",
@@ -16,6 +16,7 @@
       "Tasks": "1. main.py: pygame.init(), set window size (e.g. 800×600), title 'Tic-Tac-Toe 3D', main loop.\n2. MenuScreen: buttons for 'vs AI' (with Easy/Medium/Hard sub-choice) and '2-Player Hotseat'.\n3. GameScreen: render cube via Renderer, display current player turn, scoreboard (Player 1 / Player 2 wins + draws).\n4. On click: call hit_test(); if valid cell and correct player's turn, make_move(); check is_winner/is_draw; trigger result overlay.\n5. ResultOverlay: 'X wins!' / 'O wins!' / 'Draw!' + Play Again button. Play Again resets board; after 3+ rounds offer 'Back to Menu'.\n6. Handle window close event (pygame.QUIT).\n7. Smoke test: launch game, click through a full game to completion without crash (manual + a headless pygame test fixture).",
       "Acceptance": "python main.py opens a window. A full game (vs AI, Easy) completes without error. Scoreboard increments correctly. Play Again resets the board."
     },
-    "items": []
+    "items": [],
+    "updated": "2026-05-10T21:39:52Z"
   }
 }
