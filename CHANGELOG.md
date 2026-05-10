@@ -10,3 +10,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `src/game.py`: Board class with 27-cell 3x3x3 state, 49 win lines, move validation, and deep copy
 - `tests/test_game.py`: Full coverage of all 49 win lines, draw detection, and move validation
+- `src/ai.py`: AI opponent with Easy (random) and Medium (heuristic block/win) difficulty levels
+- `tests/test_ai.py`: AI correctness tests for valid moves, win-taking, and opponent-blocking
