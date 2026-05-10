@@ -1,0 +1,20 @@
+{
+  "vBRIEFInfo": {
+    "version": "0.6",
+    "author": "agent:deft-directive-setup",
+    "description": "Specification — 3D Tic-Tac-Toe desktop game",
+    "created": "2026-05-10T21:20:00Z"
+  },
+  "plan": {
+    "title": "tic-tac-toe (3D edition)",
+    "status": "approved",
+    "narratives": {
+      "Overview": "A 3D Tic-Tac-Toe desktop game built with Python and pygame. The board is a 3×3×3 cube (27 cells, 49 win lines) rendered in isometric perspective. Players can choose between two modes at game start: vs AI or 2-player hotseat. Three AI difficulty levels are supported: Easy (random valid moves), Medium (heuristic play), and Hard (minimax with alpha-beta pruning — optimal, unbeatable). The session scoreboard tracks wins, losses, and draws across multiple rounds without restarting the app.",
+      "Architecture": "Four modules: game.py (board state, win detection across all 49 lines, draw detection, move validation), ai.py (three difficulty levels — random, heuristic, minimax+alpha-beta), renderer.py (isometric projection of 3×3×3 cube, 2D click-to-3D-cell mapping, X/O marker rendering), ui.py (pygame window and event loop, game mode selection screen, board interaction, result display, scoreboard). Entry point: main.py. No external dependencies beyond pygame and Python stdlib.",
+      "Requirements": "FR-1: Display a 3×3×3 cube in isometric perspective in a pygame desktop window.\nFR-2: Game mode selection screen at start — vs AI or 2-player hotseat; vs AI also selects difficulty.\nFR-3: Players click a visible cell face to place their marker (X or O).\nFR-4: Validate moves — reject occupied cells and re-prompt without interrupting flow.\nFR-5: Detect win conditions across all 49 win lines; display winner with highlighted winning line.\nFR-6: Detect draw (board full, no winner) and display draw result.\nFR-7: AI difficulty — Easy: random valid move; Medium: blocks immediate opponent wins, otherwise random; Hard: minimax with alpha-beta pruning (optimal play).\nFR-8: Session scoreboard visible during play — tracks wins and draws for both players.\nFR-9: 'Play Again' button after each round resets board; returns to mode selection after confirming.\nNFR-1: Python 3.10+; only external dependency is pygame (pip install pygame).\nNFR-2: All 49 win lines must be covered by unit tests in tests/.\nNFR-3: Hard AI must be provably optimal — test that it never loses in a suite of games.\nNFR-4: Click-to-cell mapping must correctly identify the clicked cell in all visible cube orientations.",
+      "TestingStrategy": "Unit tests (pytest) in tests/: test_game.py covers all 49 win lines, draw detection, move validation; test_ai.py verifies Hard AI never loses in automated play sessions; test_renderer.py verifies click-to-cell mapping for all 27 cells. Integration: manual playthroughs of both game modes. Coverage target: 85% overall.",
+      "Deployment": "Single Python package. Install: pip install pygame. Run: python main.py. No build step required. Package structure: src/ for modules, tests/ for pytest tests, requirements.txt listing pygame."
+    },
+    "items": []
+  }
+}

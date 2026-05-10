@@ -1,0 +1,21 @@
+{
+  "vBRIEFInfo": {
+    "version": "0.6",
+    "author": "agent:deft-directive-setup",
+    "description": "Scope: isometric renderer — 3D cube projection and click mapping",
+    "created": "2026-05-10T21:20:00Z"
+  },
+  "plan": {
+    "title": "Isometric Renderer",
+    "status": "proposed",
+    "narrative": {
+      "Overview": "Implement the isometric perspective rendering of the 3×3×3 cube on a pygame surface. Maps (x,y,z) cell coordinates to 2D screen polygons, detects which cell was clicked, and renders X/O markers and win-line highlights.",
+      "Requirements": "FR-1 (isometric cube display), FR-3 (click-to-cell), FR-5 (win-line highlight), NFR-4 (click mapping correctness).",
+      "Traces": "FR-1, FR-3, FR-5, NFR-4",
+      "Dependencies": "Game Model Foundation (2026-05-10-game-model.vbrief.json)",
+      "Tasks": "1. Define iso_project(x, y, z) -> (screen_x, screen_y) using standard isometric transform (tile_width/2 per x step, tile_height/2 per y step, z shifts up).\n2. draw_cube(surface, board): iterate over all 27 cells, draw top and two visible side faces as filled polygons (back-to-front Z order for painter's algorithm).\n3. draw_marker(surface, cell, player): render X or O centered on the top face of the cell at (x,y,z).\n4. hit_test(screen_pos, board) -> int|None: for each visible cell, test if the click falls inside the top-face polygon; return cell index or None.\n5. highlight_win_line(surface, win_cells): draw a contrasting line or glow through the 3 winning cells.\n6. Write tests/test_renderer.py: hit_test returns the correct cell for the center pixel of every cell's top face (27 tests).",
+      "Acceptance": "pytest tests/test_renderer.py passes. All 27 cells are clickable and correctly identified by hit_test."
+    },
+    "items": []
+  }
+}

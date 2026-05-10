@@ -1,0 +1,20 @@
+{
+  "vBRIEFInfo": {
+    "version": "0.6",
+    "author": "agent:deft-directive-setup",
+    "description": "Scope: game model — board state, win detection, validation",
+    "created": "2026-05-10T21:20:00Z"
+  },
+  "plan": {
+    "title": "Game Model Foundation",
+    "status": "proposed",
+    "narrative": {
+      "Overview": "Implement the core game model: 3×3×3 board state, all 49 win lines, draw detection, and move validation. This is the dependency for all other scopes.",
+      "Requirements": "FR-3 (move placement), FR-4 (move validation), FR-5 (win detection — all 49 lines), FR-6 (draw detection).",
+      "Traces": "FR-3, FR-4, FR-5, FR-6, NFR-2",
+      "Tasks": "1. Define Board class: 27-cell flat list (indexed z*9+y*3+x), EMPTY/X/O markers.\n2. Compute and store WIN_LINES: 27 axis-parallel + 18 face-diagonal + 4 space-diagonal = 49 lines.\n3. Implement is_winner(player) — check all 49 lines.\n4. Implement is_draw() — all cells filled, no winner.\n5. Implement make_move(cell, player) — validate occupied/out-of-range, apply move, return True/False.\n6. Implement copy() — immutable copy for AI search.\n7. Write tests/test_game.py covering all 49 win lines (explicit), draw, invalid moves.",
+      "Acceptance": "pytest tests/test_game.py passes with all 49 win lines tested individually. Coverage >= 90% for game.py."
+    },
+    "items": []
+  }
+}

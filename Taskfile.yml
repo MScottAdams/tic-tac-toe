@@ -1,0 +1,37 @@
+version: '3'
+
+env:
+  PYTHONUTF8: "1"
+
+includes:
+  deft:
+    taskfile: ./deft/Taskfile.yml
+    optional: true
+
+tasks:
+  default:
+    desc: List all available tasks
+    cmds:
+      - task --list
+    silent: true
+
+  check:
+    desc: Run all quality checks (lint + test)
+    cmds:
+      - task: lint
+      - task: test
+
+  lint:
+    desc: Run ruff linter
+    cmds:
+      - uv run ruff check src/ tests/
+
+  fmt:
+    desc: Format code with ruff
+    cmds:
+      - uv run ruff format src/ tests/
+
+  test:
+    desc: Run pytest with coverage
+    cmds:
+      - uv run pytest tests/ -v --cov=src --cov-report=term-missing --cov-fail-under=85

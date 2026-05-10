@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+*.egg
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# uv
+.uv/
+uv.lock
+
+# deft premigrate backups
+*.premigrate.*
+
+# secrets
+secrets/
+*.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.user
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# temp files
+*.tmp
+*.bak

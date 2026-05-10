@@ -1,0 +1,17 @@
+{
+  "vBRIEFInfo": {
+    "version": "0.6",
+    "author": "agent:deft-directive-setup",
+    "description": "Research phase — tic-tac-toe game domain",
+    "created": "2026-05-10T21:20:00Z"
+  },
+  "plan": {
+    "title": "tic-tac-toe research",
+    "status": "proposed",
+    "narratives": {
+      "DontHandRoll": "Problem: AI opponent logic\nUse: Minimax algorithm (implement directly — no library needed for TTT)\nRationale: Tic-Tac-Toe has only 9 cells and a shallow game tree; minimax is simple, fast, and well-documented. External game-AI libraries add complexity with no benefit here.\n\nProblem: CLI output / terminal UI\nUse: Standard library (fmt/print) — no TUI framework needed\nRationale: TTT board display is simple enough that a 3x3 grid renders fine with plain print statements. A TUI library (e.g. tview, Rich, Spectre.Console) is overkill unless the UI needs animation or color themes.\n\nProblem: Web UI (if web target chosen)\nUse: A thin framework matching the chosen language (e.g. htmx+Go, Flask+Jinja2, or Blazor for C#)\nRationale: A full SPA framework (React, Angular) is heavy for a 3x3 grid. Choose the lightest option that matches your language.",
+      "CommonPitfalls": "Pitfall: Missing draw detection\nWhat: Game loop runs forever when board is full with no winner\nWhy: Win check passes but no full-board check\nAvoid: After every move, check win first; if no win and board is full, it's a draw\nWarning signs: Game never ends without a winner in tests\n\nPitfall: Incorrect win detection\nWhat: Win check misses diagonals or columns\nWhy: Only rows are checked, or array indices are off-by-one\nAvoid: Write explicit checks for all 8 win lines (3 rows, 3 cols, 2 diagonals); cover each with a test\nWarning signs: Agent wins horizontally but not diagonally in manual play\n\nPitfall: State mutation in minimax\nWhat: AI search corrupts the real board state\nWhy: Minimax modifies the board in place and fails to restore it\nAvoid: Copy the board before each recursive call, or pass an immutable copy\nWarning signs: After the AI plays, the board shows extra or wrong markers\n\nPitfall: No input validation\nWhat: Player can enter a cell index that is out of range or already occupied\nWhy: Happy-path code skips boundary and occupancy checks\nAvoid: Validate move before applying it; re-prompt on invalid input\nWarning signs: Crash or silent overwrite on bad input"
+    },
+    "items": []
+  }
+}

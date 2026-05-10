@@ -1,0 +1,24 @@
+{
+  "vBRIEFInfo": {
+    "version": "0.6",
+    "author": "agent:deft-directive-setup",
+    "description": "Strategy chaining state",
+    "created": "2026-05-10T21:20:00Z"
+  },
+  "plan": {
+    "title": "tic-tac-toe spec session",
+    "status": "running",
+    "narratives": {},
+    "items": []
+  },
+  "completedStrategies": [
+    {
+      "name": "research",
+      "runCount": 1,
+      "artifacts": ["vbrief/proposed/2026-05-10-tic-tac-toe-research.vbrief.json"]
+    }
+  ],
+  "artifacts": [
+    "vbrief/proposed/2026-05-10-tic-tac-toe-research.vbrief.json"
+  ]
+}

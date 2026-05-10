@@ -1,0 +1,21 @@
+{
+  "vBRIEFInfo": {
+    "version": "0.6",
+    "author": "agent:deft-directive-setup",
+    "description": "Scope: AI engine — three difficulty levels",
+    "created": "2026-05-10T21:20:00Z"
+  },
+  "plan": {
+    "title": "AI Engine",
+    "status": "proposed",
+    "narrative": {
+      "Overview": "Implement the AI opponent with three difficulty levels. Depends on Game Model Foundation.",
+      "Requirements": "FR-7 (AI difficulty levels), NFR-3 (Hard AI must be provably optimal).",
+      "Traces": "FR-7, NFR-3",
+      "Dependencies": "Game Model Foundation (2026-05-10-game-model.vbrief.json)",
+      "Tasks": "1. Easy: return a random valid cell from board.empty_cells().\n2. Medium: scan for immediate winning move for AI; if none, scan for immediate winning move for opponent and block; otherwise random.\n3. Hard: minimax with alpha-beta pruning on Board.copy() — never mutate the real board. Heuristic: +1 win, -1 loss, 0 draw, scored relative to AI player. Alpha-beta prunes at depth limit if needed (3×3×3 is tractable without depth limit).\n4. Expose get_move(board, player, difficulty) -> int as the single AI entry point.\n5. Write tests/test_ai.py: Hard AI never loses in 1000 randomized games; Medium always blocks a forced win on next move.",
+      "Acceptance": "pytest tests/test_ai.py passes. Hard AI returns a move in under 2 seconds on an empty board."
+    },
+    "items": []
+  }
+}
