@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `main.py`: pygame entry point — 800x600 window, App routing
+- `src/ui.py`: MenuScreen, GameScreen, ResultOverlay, session scoreboard, Play Again flow
+- `tests/test_ui.py`: Smoke tests for game flow and AI integration
 - `src/renderer.py`: Isometric 3D cube renderer with iso projection, painter's algorithm draw order, hit-test for all 27 cells, win-line highlight
 - `tests/test_renderer.py`: Headless renderer tests including hit-test for all 27 cell centres (NFR-4)
 - `src/game.py`: Board class with 27-cell 3x3x3 state, 49 win lines, move validation, and deep copy
