@@ -20,7 +20,6 @@ htmlcov/
 
 # uv
 .uv/
-uv.lock
 
 # deft premigrate backups
 *.premigrate.*
